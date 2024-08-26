@@ -1,0 +1,46 @@
+﻿
+.login-container {
+    display: grid;
+    align-items: center;
+    height: 70vh;
+}
+
+.login-interior {
+    border-radius: 25px;
+    background-color: #fcded8;
+}
+
+.login-right {
+    background-color: #fff;
+    border-radius: 0 25px 25px 0;
+    border: solid 2px #EFF3F4;
+    border-left: 0;
+}
+
+    .login-right p {
+        font-size: 1.2rem;
+        font-weight: 450;
+    }
+
+#logo {
+    width: 55px;
+    opacity: 0.9;
+}
+
+.form-wrapper {
+    height: 65px;
+}
+
+#btnSubmit {
+    background-color: #EC2D01;
+    color: #fff;
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+
+    #btnSubmit:hover {
+        opacity: 0.85;
+    }

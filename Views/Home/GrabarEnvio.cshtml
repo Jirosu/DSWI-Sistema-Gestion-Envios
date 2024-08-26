@@ -1,0 +1,181 @@
+﻿@model SistemaGestionEnvios.Models.Envio
+
+<main class="container p-5">
+    <h2 class="mb-5">Datos del Envío</h2>
+    @using (Html.BeginForm("GrabarEnvio", "", FormMethod.Post, new { @id = "formularioEnvio" }))
+    { 
+        <div class="d-flex gap-5 mb-3">
+            <!-- datos paquete, direccion y costo -->
+            <div class="col">
+                <fieldset>
+                    <legend>Datos del paquete</legend>
+                    <div class="form-group">
+                        <label for="paq-cate" class="form-label">
+                            Categoría del contenido
+                            <small class="text-danger" style="font-size:15px;"> *</small>
+                        </label>
+                        @Html.DropDownList("id_paq_cate", (SelectList)ViewBag.listaPaqueteCate, "Seleccione", 
+                            new { @class = "form-select", @id = "paq-cate" })
+                    </div>
+                    <div class="form-group">
+                        <label for="peso-paq" class="form-label mt-3">
+                            Peso del paquete en kilos
+                            <small class="text-danger" style="font-size:15px;"> *</small>
+                        </label>
+
+                        <div class="d-flex gap-2">
+                            <div>
+                                @Html.EditorFor(model => model.peso_paq_KG, new { htmlAttributes = 
+                                new { @class = "form-control", @id = "peso-paq", @placeholder = "ej: 1.250", @type = "number"} })                        
+                            </div>
+
+                            <div class="d-flex align-middle" style="align-items:center;">
+                                <span style="font-size: 18px;">Kilos</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </fieldset>
+                <hr>
+                <fieldset>
+                    <legend>Destino</legend>
+                    <div class="form-group">
+                        <label for="direccion-destino" class="form-label">
+                            Dirección de destino
+                            <small class="text-danger" style="font-size:15px;"> *</small>
+                        </label>                        
+                        @Html.EditorFor(model => model.direccion_destinatario, 
+                            new { htmlAttributes = new { @class = "form-control", @id = "direccion-destino", @placeholder = "Av. Principal 2485"} })                        
+                    </div>
+                    <div class="d-flex gap-2">
+                        <div class="col-7">
+                            <label for="distrito-dest" class="form-label  mt-3">
+                                Distrito
+                                <small class="text-danger" style="font-size:15px;"> *</small>
+                            </label>
+
+                            @Html.DropDownList("id_distrito", ViewBag.listaDistritos as SelectList,"Seleccione", 
+                                new { @class = "form-select", @id = "distrito-dest" })
+                        </div>
+                        <div class="col-4.5 ms-3">
+                            <label for="distrito-dest" class="form-label  mt-3 ms-4">
+                                Tarifa por kilo                                
+                            </label>           
+
+                            <div class="d-flex gap-2 fs-5">
+                                s/
+                                @Html.EditorFor(model => model.refDistrito.refTarifa.precio_x_KG, new { htmlAttributes =
+                                     new { @class = "form-control", @id = "precio_x_KG", @disabled="disabled", @placeholder ="0" }
+                                })
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="my-5 fs-3 costo-envio">
+                    @Html.HiddenFor(model => model.costo_envio)
+                    <p>Costo de envío: 
+                        <span>s/ 
+                            <span id="precio-Envio">
+                                @Html.DisplayFor(model => model.costo_envio)
+                             </span>
+                         </span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- datos remitente y destinatario -->
+            <div class="col">
+                <fieldset>
+                    <legend>Remitente</legend>
+                    <div class="form-group">
+                        <label for="nom-remitente" class="form-label">
+                            Nombre del Remitente
+                            <small class="text-danger" style="font-size:15px;"> *</small>
+                        </label>
+                        @Html.EditorFor(model => model.nom_remitente, new { htmlAttributes =
+                                 new { @class = "form-control", @id = "nom-remitente", @placeholder = "Nombre" }
+                            })
+                    </div>
+                    <div class="form-group">
+                        <label for="dni-remitente" class="form-label  mt-3">
+                            DNI del Remitente
+                            <small class="small2" style="color:#999;font-weight:normal">(máximo 8 caracteres)</small>
+                            <small class="text-danger" style="font-size:15px;"> *</small>
+                        </label>
+
+                        @Html.EditorFor(model => model.dni_remitente, new { htmlAttributes = 
+                            new { @class = "form-control", @id = "dni-remitente", @placeholder = "DNI", @type = "number" } })
+                    </div>
+                    <div class="form-group">
+                        <label for="telf-remitente" class="form-label  mt-3">
+                            Teléfono del Remitente
+                            <small class="small2" style="color:#999;font-weight:normal">(máximo 9 caracteres)</small>
+                            <small class="text-danger" style="font-size:15px;"> *</small>
+                        </label>
+
+                        @Html.EditorFor(model => model.telf_remitente, new { htmlAttributes = 
+                            new { @class = "form-control", @id = "telf-remitente", @placeholder = "Teléfono o celular", @type = "number" } })
+                    </div>
+                </fieldset>
+                <hr>
+                <fieldset>
+                    <legend>Destinatario</legend>
+                    <div class="form-group">
+                        <label for="nom-destinatario" class="form-label">Nombre del Destinatario</label>
+                        <small class="text-danger" style="font-size:15px;"> *</small>
+
+                        @Html.EditorFor(model => model.nom_destinatario, new { htmlAttributes = 
+                            new { @class = "form-control", @id = "nom-destinatario", @placeholder = "Nombre" } })                        
+                    </div>
+                    <div class="form-group">
+                        <label for="dni-destinatario" class="form-label  mt-3">
+                            DNI del Destinatario
+                            <small class="small2" style="color:#999;font-weight:normal">(máximo 8 caracteres)</small>
+                            <small class="text-danger" style="font-size:15px;"> *</small>
+                        </label>
+
+                        @Html.EditorFor(model => model.dni_destinatario, new { htmlAttributes = 
+                            new { @class = "form-control", @id = "dni-destinatario", @placeholder = "DNI", @type = "number"} })
+                    </div>
+                    <div class="form-group">
+                        <label for="telf-destinatario" class="form-label  mt-3">
+                            Teléfono del Destinatario
+                            <small class="small2" style="color:#999;font-weight:normal">(máximo 9 caracteres)</small>
+                            <small class="text-danger" style="font-size:15px;"> *</small>
+                        </label>                       
+                        @Html.EditorFor(model => model.telf_destinatario, new { htmlAttributes = 
+                            new { @class = "form-control", @id = "telf-destinatario", @placeholder = "Teléfono o celular", @type = "number"} })
+                    </div>
+                </fieldset>
+            </div>
+
+        </div>
+
+        <div class="text-center mb-3">
+            <a asp-action="Index">
+                <button type="button" class="btn btn-primary btn-width">Regresar</button>
+            </a>
+            <input type="submit" value="Registrar" class="btn btn-success ms-3 btn-width">
+        </div>
+    }
+    @if (@ViewBag.msjExito != null)
+    {
+        <div class="alert alert-success text-center" role="alert">
+            @ViewBag.msjExito
+        </div>
+    }
+    @if (@ViewBag.msjError != null)
+    {
+        <div class="alert alert-danger text-center" role="alert">
+            @ViewBag.msjError
+        </div>
+    }
+</main>
+
+
+@section Scripts {
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+    <script src="~/js/formGrabar.js"></script>
+}

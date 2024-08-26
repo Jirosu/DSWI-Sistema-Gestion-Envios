@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]Sistema de Gestión de Envios</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/SistemaGestionEnvios.styles.css" asp-append-version="true" />
+
+    <link href="~/lib/bootstrap-icons-1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="~/lib/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/navbar.css" rel="stylesheet" />
+    <link href="~/css/login.css" rel="stylesheet" />
+    <link href="~/css/formulario.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar  nav-container">
+            <div class="container-fluid  px-4">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                    <img src="~/img/logo.png" alt="Logo" height="24" class="d-inline-block align-text-top" id="logo-nav">
+                    <span class="navbar-brand mb-0 h1" id="nav-heading">Delivery Express</span>
+                </a>
+                <a asp-action="Login" class="logout-a">
+                    <span class="navbar-brand mb-0 h1 d-flex align-items-center gap-2 logout">
+                        <i class="bi bi-box-arrow-right logout-icon"></i>
+                        Salir
+                    </span>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="text-center text-lg-start d-flex align-items-center justify-content-center footer-container ">
+        <div class="text-center p-3 fs-5">
+            © 2024 Copyright: Delivery Express
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/lib/datepicker/bootstrap-datepicker.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

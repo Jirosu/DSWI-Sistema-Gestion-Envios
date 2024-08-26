@@ -1,0 +1,70 @@
+/* estados */
+.estado {
+    padding: 3px 15px;
+    border-radius: 15px;
+}
+
+.pendiente {
+    color: #1d2327;
+    background-color: #c3c4c7 !important;
+}
+
+.en-camino {
+    color: #00131c;
+    background-color: #72aeec !important;
+}.camino {
+    color: #00131c;
+    background-color: #72aeec !important;
+}
+
+.entregado {
+    color: #001c05;
+    background-color: #acceac !important;
+}
+
+.cancelado {
+    color: #451313;
+    background-color: #ff8085 !important;
+}
+
+/* icons */
+td i {
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.icon-container {
+    display: flex;
+}
+
+.icon {
+    text-align: center;
+    width: 35px;
+}
+
+.icon-detalle {
+    color: #006400;
+}
+
+    .icon-detalle:hover {
+        background-color: #acceac;
+        border-radius: 50%;
+    }
+
+.icon-actualizar {
+    color: #daa520;
+}
+
+    .icon-actualizar:hover {
+        background-color: #f0dba1;
+        border-radius: 50%;
+    }
+
+.icon-eliminar {
+    color: #F4112E;
+}
+
+    .icon-eliminar:hover {
+        background-color: #ebb2b3;
+        border-radius: 50%;
+    }

@@ -1,0 +1,119 @@
+﻿
+@model IEnumerable<SistemaGestionEnvios.Models.Envio>
+
+
+
+
+<main class="container p-5">
+    <h2>Gestión de envíos</h2>
+    <div class="d-flex justify-content-between">
+        @using (Html.BeginForm("Index", "", FormMethod.Post, new { @class = "d-flex", @style = "height: 40px" }))
+        {
+            @Html.DropDownList("id_estado_envio", (SelectList)ViewBag.listaDistritos, "Estado",
+                     new { @class = "form-select  ", @id = "idEstado" })
+
+            <input type="hidden" name="idEstado" id="idEstadoHidden" value="" />
+            <input type="submit" value="Buscar" class="btn btn-success ms-3 btn-width">
+
+        }
+            <div class="my-3 text-end" style="width: 220px">        
+                <a asp-action="GrabarEnvio">
+                    <button type="button" class="btn btn-primary">
+                        <i class="bi bi-plus-lg"></i>
+                        Registrar envío
+                    </button>
+                </a>        
+            </div>
+
+    </div>
+
+    <table class="table border align-middle">
+        <thead>
+            <tr class="table-secondary">
+                <th scope="col" class="col-0.5">ID</th>
+                <th scope="col" class="col-1.5">Fecha</th>
+                <th scope="col" class="col-1.5">Estado</th>
+                <th scope="col" class="col-1">Peso kg</th>
+                <th scope="col" class="col-3">Dirección de entrega</th>
+                <th scope="col" class="col-3">Distrito</th>
+                <th scope="col" class="col-1.5"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@Html.DisplayFor(modelItem => item.id_envio)</th>
+                    <td>@Html.DisplayFor(modelItem => item.fecha_registro_envio)</td>
+                    <td>
+                        @{
+                            var estado = item.refEstadoEnvio.descrip_estado_envio.ToLower(); 
+                        }
+                        <span class="estado @estado">
+                            @Html.DisplayFor(modelItem => item.refEstadoEnvio.descrip_estado_envio)
+                        </span>                        
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.peso_paq_KG)</td>
+                    <td>@Html.DisplayFor(modelItem => item.direccion_destinatario)</td>
+                    <td>@Html.DisplayFor(modelItem => item.refDistrito.nombre_dist)</td>
+                    <td class="icon-container">
+              
+                        @Html.ActionLink("", "DetalleEnvio", new { idEnvio = item.id_envio}, new { @class = "icon icon-detalle" })
+                        @Html.ActionLink("", "EditarEnvio", new { idEnvio = item.id_envio }, new { @class = "icon icon-actualizar"})
+
+                        @using (Html.BeginForm("EliminarEnvio", "", FormMethod.Post))
+                        {
+                            <input type="hidden" name="idEnvio" value="@item.id_envio" />
+
+                            <div class="icon icon-eliminar btnEliminar"></div>
+
+
+                            <dialog class="modalConfirmacion border-opacity-50 rounded border border-2">
+                                <div class="">
+                                    <div class="">
+                                        <h1 class=" fs-5">Eliminar registro</h1>
+                                    </div>
+                                    <div class="my-3">
+                                        ¿Está seguro que desea eliminar el registro?
+                                    </div>
+                                    <div class="text-end">
+                                        <button type="button" class="btn btn-secondary btnCerrarModal"  >Cancelar</button>
+                                        <button type="submit" class="btn btn-danger ms-2" >Eliminar</button>
+                                    </div>
+                                </div>
+                            </dialog> 
+                        }
+                    </td>
+
+                    @if (@ViewBag.msjExito != null)
+                    {
+                        <div class="alert alert-success text-center" role="alert">
+                            @ViewBag.msjExito
+                        </div>
+                    }
+                    @if (@ViewBag.msjError != null)
+                    {
+                        <div class="alert alert-danger text-center" role="alert">
+                            @ViewBag.msjError
+                        </div>
+                    }
+                </tr>                
+            }
+        </tbody>
+    </table>
+    <div class="ms-3">
+        Cantidad de registros: @Model.Count()
+    </div>
+    
+</main>
+
+<script>
+    const cmbEstado = document.getElementById('idEstado');
+    cmbEstado.addEventListener('change', () => {
+        const estado = cmbEstado.value;
+
+        document.getElementById('idEstadoHidden').value = estado;
+    })
+
+    
+</script>

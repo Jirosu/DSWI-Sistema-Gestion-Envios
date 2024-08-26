@@ -1,0 +1,38 @@
+﻿/* navbar */
+.nav-container {
+    background-color: #D53D1B;
+}
+
+#logo-nav {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(24deg) brightness(104%) contrast(101%);
+}
+
+#nav-heading {
+    color: #fff;
+}
+
+.logout {
+    color: #fff;
+}
+.logout:hover{
+    opacity: 0.85;
+    cursor:pointer;
+}
+
+.logout-icon {
+    font-size: 1.5rem;
+}
+
+.logout-a {
+    text-decoration: none;    
+}
+
+/* footer */
+.footer-container {
+    background-color: #e2e3e5;
+    height: 100px;
+}
+
+.btn-width {
+    min-width: 100px !important;
+}

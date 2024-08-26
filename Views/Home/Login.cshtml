@@ -1,0 +1,43 @@
+﻿
+<main>
+    <div class="container col-8 col login-container">
+        <div class="row login-interior">
+            <div class="col d-flex align-items-center">
+                <img src="~/img/imagen1.png" alt="">
+            </div>
+            <div class="col login-right">
+                <div class="d-flex align-items-center gap-2 my-3 mt-5">
+                    <img src="~/img/logo.png" alt="" id="logo">
+                    <h3>Delivery Express</h4>
+                </div>               
+                <p class="my-3">Iniciar Sesión</p>                 
+                @using (Html.BeginForm("Login", "", FormMethod.Post, new { @id = "formularioLogin" }))
+                {
+                    <div class="form-group form-wrapper">
+                        @Html.TextBox("username", "", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group form-wrapper">
+                        @Html.TextBox("password", "", new { @type = "password", @class = "form-control" })
+
+                        @if (@ViewBag.Mensaje != null)
+                        {
+                            <div class="text-danger text-center" role="alert">
+                                @ViewBag.Mensaje
+                            </div>
+                        }
+                    </div>
+
+                    <div class="form-group mb-5">
+                        <input type="submit" class="btn  fw-semibold" value="Ingresar" id="btnSubmit" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</main>
+
+
+@section Scripts {
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+    <script src="~/js/loginvalidation.js"></script>
+}
